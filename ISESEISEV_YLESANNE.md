@@ -18,7 +18,6 @@ Sa oled arendaja. Saad emaili tiimijuhilt:
 
 *Sinu ülesanne: paranda vead, lisa automatiseerimine, dokumenteeri ja analüüsi arhitektuur.*
 
-*Tähtaeg: 90 minutit.*
 
 *Edu!*
 
