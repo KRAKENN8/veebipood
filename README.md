@@ -110,3 +110,64 @@ Teenused suhtleksid omavahel API päringute kaudu ning neid saaks juurutada ja s
 * keerulisem seadistamine ja haldamine;
 * teenustevaheline kommunikatsioon tekitab lisakeerukust;
 * testimine ja silumine muutuvad keerulisemaks.
+
+## Monoliit vs Mikroteenused
+
+### Praegune lahendus (Monoliit)
+
+```text
+veebipood/
+│
+├── src/
+│   ├── routes/
+│   │   ├── users.js
+│   │   ├── products.js
+│   │   └── orders.js
+│   │
+│   ├── data.js
+│   ├── server.js
+│   └── test.js
+│
+├── Dockerfile
+├── docker-compose.yml
+├── package.json
+├── package-lock.json
+├── README.md
+└── ISESEISEV_YLESANNE.md
+```
+
+---
+
+### Võimalik lahendus mikroteenustega
+
+```text
+veebipood/
+│
+├── api-gateway/
+│   ├── server.js
+│   └── package.json
+│
+├── user-service/
+│   ├── routes/
+│   │   └── users.js
+│   ├── data/
+│   ├── server.js
+│   └── package.json
+│
+├── product-service/
+│   ├── routes/
+│   │   └── products.js
+│   ├── data/
+│   ├── server.js
+│   └── package.json
+│
+├── order-service/
+│   ├── routes/
+│   │   └── orders.js
+│   ├── data/
+│   ├── server.js
+│   └── package.json
+│
+├── docker-compose.yml
+└── README.md
+```
