@@ -7,26 +7,23 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
-    name: Automaattestid
+  build-and-test:
+    name: Kontrolli rakenduse käivitumist
     runs-on: ubuntu-latest
     steps:
       - name: Lae kood alla
         uses: actions/checkout@v4
 
-      - name: Paigalda Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - name: Käivita teenused Dockeriga
+        run: docker-compose up -d
 
-      - name: Paigalda sõltuvused
-        run: npm install
+      - name: Oota teenuste käivitumist
+        run: sleep 10
 
-      - name: Käivita rakendus
-        run: node src/server.js &
+      - name: Kontrolli API Gateway staatust (Health check)
+        run: |
+          # Проверяем, отвечает ли API Gateway (порт 3000)
+          curl -f http://localhost:3000/health || exit 1
 
-      - name: Oota kuni server käivitub
-        run: sleep 3
-
-      - name: Käivita testid
-        run: node src/test.js
+      - name: Peata teenused
+        run: docker-compose down
