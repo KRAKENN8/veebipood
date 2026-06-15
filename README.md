@@ -146,27 +146,25 @@ veebipood/
 ├── api-gateway/
 │   ├── server.js
 │   └── package.json
+│   └── Dockerfile
 │
 ├── user-service/
-│   ├── routes/
-│   │   └── users.js
 │   ├── data/
 │   ├── server.js
 │   └── package.json
+│   └── Dockerfile
 │
 ├── product-service/
-│   ├── routes/
-│   │   └── products.js
 │   ├── data/
 │   ├── server.js
 │   └── package.json
+│   └── Dockerfile
 │
 ├── order-service/
-│   ├── routes/
-│   │   └── orders.js
 │   ├── data/
 │   ├── server.js
 │   └── package.json
+│   └── Dockerfile
 │
 ├── docker-compose.yml
 └── README.md
