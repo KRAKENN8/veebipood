@@ -1,61 +1,87 @@
 # Veebipood
 
-<!-- TODO: Kirjelda mis see rakendus on -->
+Veebipood on Node.js ja Expressi põhine REST API, mis võimaldab hallata kasutajaid, tooteid ja tellimusi. Rakendus toetab kasutajate registreerimist ja sisselogimist, toodete vaatamist ning tellimuste loomist ja haldamist.
 
 ## Tehnoloogiad
 
-<!-- TODO -->
+* Node.js
+* Express.js
+* JavaScript (CommonJS)
+* REST API
+* GitHub Actions (CI)
+* In-memory andmesalv (andmed hoitakse rakenduse mälus)
 
 ## Käivitamine
 
-<!-- TODO -->
+Paigalda sõltuvused:
+
+```bash
+npm install
+```
+
+Käivita rakendus:
+
+```bash
+docker compose up --build -d
+```
+
+Server käivitub vaikimisi pordil 3000.
 
 ## Testikasutajad
 
-<!-- TODO -->
+| Nimi         | Kasutajanimi   | Parool |
+| ------------ | ----- | ------ |
+| Mari         | Kuusk | 1234   |
+| Mart         | Kuusk | 4321   |
 
 ## Teadaolevad vead
 
-Rakenduses on kaks viga mida pead parandama:
-
-1. `src/routes/products.js` — otsing ei tööta
-2. `src/routes/orders.js` — tellimuse staatus on vale
+Ei ole
 
 ## API endpointid
 
 ### Kasutajad
 
-| Meetod | URL | Kirjeldus |
-|--------|-----|-----------|
-| POST | /api/users/signup | <!-- TODO --> |
-| POST | /api/users/login | <!-- TODO --> |
-| POST | /api/users/logout | <!-- TODO --> |
-| GET | /api/users/me | <!-- TODO --> |
+| Meetod | URL               | Kirjeldus                               |
+| ------ | ----------------- | --------------------------------------- |
+| POST   | /api/users/signup | Registreerib uue kasutaja               |
+| POST   | /api/users/login  | Logib kasutaja sisse ja tagastab tokeni |
+| POST   | /api/users/logout | Logib kasutaja välja                    |
+| GET    | /api/users/me     | Tagastab sisselogitud kasutaja andmed   |
 
 ### Tooted
 
-| Meetod | URL | Kirjeldus |
-|--------|-----|-----------|
-| GET | /api/products | <!-- TODO --> |
-| GET | /api/products/:id | <!-- TODO --> |
-| GET | /api/products/search | <!-- TODO --> |
-| GET | /api/products/categories | <!-- TODO --> |
-| GET | /api/products/category/:cat | <!-- TODO --> |
+| Meetod | URL                           | Kirjeldus                          |
+| ------ | ----------------------------- | ---------------------------------- |
+| GET    | /api/products                 | Tagastab kõik tooted               |
+| GET    | /api/products/:id             | Tagastab konkreetse toote ID järgi |
+| GET    | /api/products/search?name=... | Otsib tooteid nime järgi           |
+| GET    | /api/products/categories      | Tagastab kõik kategooriad          |
+| GET    | /api/products/category/:cat   | Tagastab kategooria tooted         |
 
 ### Tellimused
 
-| Meetod | URL | Kirjeldus |
-|--------|-----|-----------|
-| POST | /api/orders | <!-- TODO --> |
-| GET | /api/orders | <!-- TODO --> |
-| GET | /api/orders/me | <!-- TODO --> |
-| GET | /api/orders/:id | <!-- TODO --> |
-| PATCH | /api/orders/:id/status | <!-- TODO --> |
+| Meetod | URL                    | Kirjeldus                                 |
+| ------ | ---------------------- | ----------------------------------------- |
+| POST   | /api/orders            | Loob uue tellimuse                        |
+| GET    | /api/orders            | Tagastab kõik tellimused                  |
+| GET    | /api/orders/me         | Tagastab sisselogitud kasutaja tellimused |
+| GET    | /api/orders/:id        | Tagastab konkreetse tellimuse             |
+| PATCH  | /api/orders/:id/status | Muudab tellimuse staatust                 |
 
 ## Arhitektuur
 
-<!-- TODO: Mis arhitektuur see rakendus kasutab ja miks? -->
+Rakendus kasutab kihilist (Layered Architecture) arhitektuuri.
 
 ## GitHub Actions
 
-<!-- TODO: Kirjelda mis toimub automaatselt -->
+GitHub Actions käivitub automaatselt iga push'i ja pull request'i korral.
+
+Automaatika:
+
+1. Paigaldab projekti sõltuvused.
+2. Käivitab testid.
+3. Kontrollib, et rakendus käivitub korrektselt.
+4. Annab tagasisidet, kas build ja testid läbisid edukalt.
+
+See aitab avastada vead enne muudatuste ühendamist põhiharusse.
