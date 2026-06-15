@@ -1,9 +1,28 @@
 services:
-  app:
-    build: .
+  gateway:
+    build: ./src/api-gateway
+    container_name: gateway
     ports:
       - "3000:3000"
-    container_name: veebipood
-    environment:
-      - NODE_ENV=development
-    restart: unless-stopped
+    depends_on:
+      - users
+      - products
+      - orders
+
+  users:
+    build: ./src/user-service
+    container_name: users
+    ports:
+      - "3001:3001"
+
+  products:
+    build: ./src/product-service
+    container_name: products
+    ports:
+      - "3002:3002"
+
+  orders:
+    build: ./src/order-service
+    container_name: orders
+    ports:
+      - "3003:3003"
