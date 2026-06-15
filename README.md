@@ -85,3 +85,28 @@ Automaatika:
 4. Annab tagasisidet, kas build ja testid läbisid edukalt.
 
 See aitab avastada vead enne muudatuste ühendamist põhiharusse.
+
+## Võimalik üleminek mikroteenustele
+
+Kui rakendus kasvaks märkimisväärselt suuremaks, võiks monoliitse arhitektuuri asemel kasutada mikroteenuste arhitektuuri.
+
+Sellisel juhul jagataks süsteem mitmeks iseseisvaks teenuseks, näiteks:
+
+* **User Service** – kasutajate registreerimine ja autentimine;
+* **Product Service** – toodete ja kategooriate haldamine;
+* **Order Service** – tellimuste loomine ja staatuste haldamine.
+
+Teenused suhtleksid omavahel API päringute kaudu ning neid saaks juurutada ja skaleerida sõltumatult.
+
+### Eelised
+
+* parem skaleeritavus;
+* iga teenust saab arendada ja juurutada eraldi;
+* ühe teenuse rike ei pruugi mõjutada kogu süsteemi;
+* sobib suurtele ja kiiresti kasvavatele projektidele.
+
+### Puudused
+
+* keerulisem seadistamine ja haldamine;
+* teenustevaheline kommunikatsioon tekitab lisakeerukust;
+* testimine ja silumine muutuvad keerulisemaks.
