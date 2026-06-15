@@ -7,23 +7,32 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
-    name: Kontrolli rakenduse käivitumist
+  test-and-deploy:
+    name: Käivita teenused ja kontrolli
     runs-on: ubuntu-latest
     steps:
       - name: Lae kood alla
         uses: actions/checkout@v4
 
-      - name: Käivita teenused Dockeriga
-        run: docker-compose up -d
+      - name: Paigalda Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Ehita Dockeri pildid
+        run: docker compose build
+
+      - name: Käivita teenused taustal
+        run: docker compose up -d
 
       - name: Oota teenuste käivitumist
         run: sleep 10
 
-      - name: Kontrolli API Gateway staatust (Health check)
+      - name: Kontrolli API Gateway staatust
         run: |
           # Проверяем, отвечает ли API Gateway (порт 3000)
           curl -f http://localhost:3000/health || exit 1
 
-      - name: Peata teenused
-        run: docker-compose down
+      - name: Peata ja eemalda teenused
+        if: always() # Выполнится даже если предыдущие шаги упали
+        run: docker compose down
